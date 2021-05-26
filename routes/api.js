@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const UniversityController = require("../controllers/UniversityController");
 const EstablishmentController = require("../controllers/EstablishmentController");
+const ProjetController = require("../controllers/ProjetController");
 const LaboratoryController = require("../controllers/LaboratoryController");
 const NotificationController = require("../controllers/NotificationController");
 const UserController = require("../controllers/UserController");
@@ -201,6 +202,47 @@ router.get(
   "/establishment-of-director/:user_id",
   authorize([role.RESEARCH_DIRECTOR]),
   EstablishmentController.getEstablishmentOfDirector)
+
+
+/************* Projets endpoints ***********/
+
+router.post(
+  "/projets",
+  authorize([role.LABORATORY_HEAD]),
+  ProjetController.createProjet
+);
+
+router.put(
+  "/projets",
+  authorize([role.LABORATORY_HEAD]),
+  ProjetController.updateProjet
+);
+
+router.get(
+  "/projets/:_id",
+  authorize([role.LABORATORY_HEAD]),
+  ProjetController.findProjet
+);
+
+router.get(
+  "/projets",
+  authorize([role.LABORATORY_HEAD]),
+  ProjetController.findAllProjets
+);
+
+router.delete(
+  "/projets/:_id",
+  authorize([role.LABORATORY_HEAD]),
+  ProjetController.deleteProjet
+);
+
+
+
+
+
+
+
+
 /************* Laboratories endpoints ***********/
 router.post(
   "/laboratories",
